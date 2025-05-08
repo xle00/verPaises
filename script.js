@@ -17,7 +17,7 @@ fetch("./data.json").then(response => response.json()).then(data => {
     const container = svg.append("g")
    
     const size = d3.scaleSqrt()
-    .domain([d3.min(data, d=> d.population / d.area), d3.max(data, d=> d.population / d.area)])
+    .domain([d3.min(data, d=> d.area), d3.max(data, d=> d.area)])
     .range([baseSize * 0.00615, baseSize * 0.18])
 
     const tooltip = d3.select(".tooltip")
@@ -25,7 +25,7 @@ fetch("./data.json").then(response => response.json()).then(data => {
     const simulation = d3.forceSimulation(data)
     .force("center", d3.forceCenter(width/2, height/2))
     .force("charge", d3.forceManyBody().strength(6))
-    .force('collision', d3.forceCollide().radius(d => size(d.population / d.area) + 6))
+    .force('collision', d3.forceCollide().radius(d => size(d.area) + 6))
     .on('tick', () => {
         node.attr("transform", d => `translate(${d.x},${d.y})`);
     })
@@ -50,7 +50,7 @@ fetch("./data.json").then(response => response.json()).then(data => {
     .data(data)
     .enter()
     .append("circle")
-    .attr("r", d => size(d.population / d.area))
+    .attr("r", d => size(d.area))
     .attr("fill", (d, i) => `url(#flag-${i})`)
     .on("mouseover", function(event, d) {
 
