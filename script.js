@@ -1,4 +1,5 @@
 fetch("./data.json").then(response => response.json()).then(data => {
+    print = console.log
     console.log(data.filter(d => !d.population || !d.area));
 
     const width = 1000
@@ -139,12 +140,16 @@ fetch("./data.json").then(response => response.json()).then(data => {
         return d.population / d.area 
     }
 
+    // Select view
     d3.select("#metric-select").on("change", function() {
-        currentMetric = d3.select(this).property("value");
+        value = d3.select(this).property("value");
+        currentMetric = value
+        text = d3.select(`#${value}`).html()
+
+        d3.select("#currentMetric").html(text)
+        // tooltip.html(`<strong>${d.name.common}</strong><br>Pop: ${d.population.toLocaleString()}<br>Area: ${d.area.toLocaleString()}km<sup>2</sup>`)
         updateBubbles()
     })
-
-
 
 }
 )

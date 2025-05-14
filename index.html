@@ -8,12 +8,12 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <h1>Population</h1>
+    <h1 id="currentMetric">Population</h1>
     
     <select id="metric-select">
-        <option value="density">Densidade Populacional</option>
-        <option value="population">População</option>
-        <option value="area">Área</option>
+        <option id="density" value="density">Densidade Populacional</option>
+        <option id="population" value="population">População</option>
+        <option id="area" value="area">Área</option>
     </select>
 
     <div id="chart" style="width: 100%; height: 100vh;"></div>
